@@ -25,14 +25,8 @@ foreach ($request_json['events'] as $event)
 				$reply_message .= "พิมพ์ว่า \"@บอท ขอรหัส FTP ของ s61160xxx\"\r\n";
 				
 				if($arr[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ"){
-					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
-					foreach($result_users as $values) {
-						$reply_message = $values["user_firstname"];
-						if($arr[2] == $values["user_firstname"]){
-							$data = $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
-						}
-					}
-					$reply_message = $values["user_firstname"];
+					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php?sid='.$arr[2]);
+					$reply_message = $result_users;
 				}
 			}
 			
