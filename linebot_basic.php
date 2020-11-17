@@ -12,6 +12,7 @@ foreach ($request_json['events'] as $event)
 	{
 		if($event['message']['type'] == 'text')
 		{
+			$text = $event['message']['text'];
 			if($txts[0] == "@บอท"){
 				
 				$reply_message = "กรุณาใช้รูปแบบคำสั่งที่ถูกต้องงงงง!!\n";
