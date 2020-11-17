@@ -94,7 +94,7 @@ function mySQL_selectAll($url)
 // 		$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 // 	}
 	
-	return $data;
+	return $result_json;
 }
 
 ?>
