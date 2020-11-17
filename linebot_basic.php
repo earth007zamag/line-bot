@@ -28,7 +28,7 @@ foreach ($request_json['events'] as $event)
 					$result_json = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					foreach($result_json as $values) {
 						if($arr[2] == $values["user_firstname"]){
-							$data = $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
 					}
 					$reply_message = $data;
