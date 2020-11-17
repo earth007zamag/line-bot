@@ -13,7 +13,7 @@ foreach ($request_json['events'] as $event)
 		if($event['message']['type'] == 'text')
 		{
 			$text = $event['message']['text'];
-			if($txt[0] == "@บอท"){
+			if($text[0] == "@บอท"){
 				
 				$reply_message = "กรุณาใช้รูปแบบคำสั่งที่ถูกต้องงงงง!!\n";
 				
@@ -23,10 +23,10 @@ foreach ($request_json['events'] as $event)
 				$reply_message .= "พิมพ์ว่า \"@บอท ขอรายชื่อนิสิต รหัส 61160xxx\"\n";
 				$reply_message .= "พิมพ์ว่า \"@บอท ขอรหัส FTP ของ s61160xxx\"\r\n";
 				
-				if($txt[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ"){
+				if($text[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ"){
 					$result_json = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					foreach($result_json as $values) {
-						if($txt[2] == $values["user_firstname"]){
+						if($text[2] == $values["user_firstname"]){
 							$data = $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
 					}
