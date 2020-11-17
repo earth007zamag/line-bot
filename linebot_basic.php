@@ -25,7 +25,12 @@ foreach ($request_json['events'] as $event)
 				$reply_message .= "พิมพ์ว่า \"@บอท ขอรหัส FTP ของ s61160xxx\"\r\n";
 				
 				if($arr[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ"){
-					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php?user_firstname='.$arr[2]);
+					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
+					foreach($result_users as $values) {
+						if($arr[2] == $values["user_firstname"]){
+							$data = $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+						}
+					}
 					$reply_message = $result_users;
 				}
 			}
@@ -83,11 +88,11 @@ function mySQL_selectAll($url)
 	
 	$result_json = json_decode($result, true); //var_dump($result_json);
 	
-	$data = "ผลลัพธ์:\r\n";
+// 	$data = "ผลลัพธ์:\r\n";
 		
-	foreach($result_json as $values) {
-		$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
-	}
+// 	foreach($result_json as $values) {
+// 		$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+// 	}
 	
 	return $data;
 }
