@@ -21,13 +21,20 @@ foreach ($request_json['events'] as $event)
 				$reply_message .= "ฉันมีบริการให้คุณสั่งได้ ดังนี้...\n";
 				
 				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตชื่อ ...\"\n";
-				$reply_message .= "พิมพ์ว่า \"@บอท ขอรายชื่อนิสิต รหัส 61160xxx\"\n";
-				$reply_message .= "พิมพ์ว่า \"@บอท ขอรหัส FTP ของ s61160xxx\"\r\n";
-				
+				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล ...\"\n";
+
 				if($arr[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ"){
 					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					foreach($result_users as $values) {
 						if($arr[2] == $values["user_firstname"]){
+							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+						}
+					}
+					$reply_message = $data;
+				}else if($arr[1] == "ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล"){
+					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
+					foreach($result_users as $values) {
+						if($arr[2] == $values["user_lastname"]){
 							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
 					}
