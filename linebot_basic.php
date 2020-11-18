@@ -33,9 +33,6 @@ foreach ($request_json['events'] as $event)
 						if($values["user_firstname"] == 'นาย'.$arr[2]||$values["user_firstname"] == 'นางสาว'.$arr[2]){
 							$data .= "พบชื่อ: ".$values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
-						if($arr[2] == $values["user_firstname"])){
-							$data .= "พบชื่อ: ".$values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
-						}
 					}
 					$reply_message = $data;
 				}
