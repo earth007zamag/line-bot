@@ -20,17 +20,18 @@ foreach ($request_json['events'] as $event)
 				
 				$reply_message .= "ฉันมีบริการให้คุณสั่งได้ ดังนี้...\n";
 				
-				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตชื่อ นาย/นางสาว...\"\n";
+				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตชื่อ ...\"\n";
 				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล ...\"\n";
-				$reply_message .= "พิมพ์ว่า \"@บอท แสดงรายชื่อทั้งหมด \"\n";
+				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตรหัสนิสิต ...\"\n";
+				$reply_message .= "พิมพ์ว่า \"@บอท แสดงรายชื่อนิสิตทั้งหมด \"\n";
 				$reply_message .= "พิมพ์ว่า \"@บอท ใครคือผู้พัฒนา \"\n";
 				
 
 				if($arr[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ"){
 					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					foreach($result_users as $values) {
-						if($arr[2] == $values["user_firstname"]){
-							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+						if($values["user_firstname"] == 'นาย'.$arr[2]||$values["user_firstname"] == 'นางสาว'.$arr[2]){
+							$data .= "พบชื่อ".$values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
 					}
 					$reply_message = $data;
@@ -39,20 +40,29 @@ foreach ($request_json['events'] as $event)
 					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					foreach($result_users as $values) {
 						if($arr[2] == $values["user_lastname"]){
-							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+							$data .= "พบชื่อ".$values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
 					}
 					$reply_message = $data;
 				}
-				if($arr[1] == "แสดงรายชื่อทั้งหมด"){
+				if($arr[1] == "แสดงรายชื่อนิสิตทั้งหมด"){
 					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					foreach($result_users as $values) {
-						$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+						$data .= $values["user_stuid"] . " " . $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 					}
 					$reply_message = $data;
 				}
 				if($arr[1] == "ใครคือผู้พัฒนา"){
 					$reply_message = "นายธณัช จินตกานนท์ 61160060 \n";
+				}
+				if($arr[1] == "ฉันต้องการค้นหาข้อมูลนิสิตรหัสนิสิต"){
+					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
+					foreach($result_users as $values) {
+						if($arr[2] == $values["user_stuid"]){
+							$data .= "พบชื่อ".$values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+						}
+					}
+					$reply_message = $data;
 				}
 			}
 			
