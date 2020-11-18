@@ -23,6 +23,8 @@ foreach ($request_json['events'] as $event)
 				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตชื่อ นาย/นางสาว...\"\n";
 				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล ...\"\n";
 				$reply_message .= "พิมพ์ว่า \"@บอท แสดงรายชื่อทั้งหมด \"\n";
+				$reply_message .= "พิมพ์ว่า \"@บอท ใครคือผู้พัฒนา \"\n";
+				
 
 				if($arr[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ"){
 					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
@@ -48,6 +50,9 @@ foreach ($request_json['events'] as $event)
 						$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 					}
 					$reply_message = $data;
+				}
+				if($arr[1] == "ไครคือผู้พัฒนา"){
+					$result_users = "นายธณัช จินตกานนท์ 61160060 \n";
 				}
 			}
 			
