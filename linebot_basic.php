@@ -73,10 +73,6 @@ foreach ($request_json['events'] as $event)
 							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
 					}
-					$reply_message = $data;
-				}
-				if($arr[1] == "ฉันต้องการทราบจำนวนนิสิต"){
-					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					if($arr[2] == "ชาย"){
 						foreach($result_users as $values) {
 							$male = substr("$values["user_firstname"]",0,3);
@@ -84,10 +80,6 @@ foreach ($request_json['events'] as $event)
 								$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
 					}
-					$reply_message = $data;
-				}
-				if($arr[1] == "ฉันต้องการทราบจำนวนนิสิต"){
-					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					if($arr[2] == "หญิง"){
 						foreach($result_users as $values) {
 							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
