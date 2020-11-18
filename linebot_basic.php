@@ -52,7 +52,7 @@ foreach ($request_json['events'] as $event)
 					$reply_message = $data;
 				}
 				if($arr[1] == "ใครคือผู้พัฒนา"){
-					$result_users = "นายธณัช จินตกานนท์ 61160060 \n";
+					$reply_message = "นายธณัช จินตกานนท์ 61160060 \n";
 				}
 			}
 			
