@@ -81,7 +81,7 @@ foreach ($request_json['events'] as $event)
                                 			$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
                         			}
 					}
-					$reply_message = $data;
+					$reply_message = $male;
 				}
 			}
 			
