@@ -66,7 +66,7 @@ foreach ($request_json['events'] as $event)
 					}
 					$reply_message = $data;
 				}
-				if($arr[1] == "ฉันต้องการทราบจำนวนนิสิต" && $arr[2] == "ทั้งหมด"){
+				if($arr[1] == "ฉันต้องการทราบจำนวนนิสิต" && $arr[2] == "ทั้งหมด" || $arr[1] == "ฉันต้องการทราบจำนวนนิสิตทั้งหมด" ){
 					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 					foreach($result_users as $values) {
 						$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
