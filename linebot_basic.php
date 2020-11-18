@@ -23,7 +23,9 @@ foreach ($request_json['events'] as $event)
 				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตชื่อ ...\"\n";
 				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล ...\"\n";
 				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการค้นหาข้อมูลนิสิตรหัสนิสิต ...\"\n";
-				$reply_message .= "พิมพ์ว่า \"@บอท แสดงรายชื่อนิสิตทั้งหมด \"\n";
+				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการทราบจำนวนนิสิต ชาย ทั้งหมด \"\n";
+				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการทราบจำนวนนิสิต หญิง ทั้งหมด \"\n";
+				$reply_message .= "พิมพ์ว่า \"@บอท ฉันต้องการทราบจำนวนนิสิต ทั้งหมด \"\n";
 				$reply_message .= "พิมพ์ว่า \"@บอท ใครคือผู้พัฒนา \"\n";
 				
 
@@ -60,6 +62,35 @@ foreach ($request_json['events'] as $event)
 					foreach($result_users as $values) {
 						if($arr[2] == $values["user_stuid"]){
 							$data .= "พบชื่อ: ".$values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+						}
+					}
+					$reply_message = $data;
+				}
+				if($arr[1] == "ฉันต้องการทราบจำนวนนิสิต"){
+					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
+					if($arr[2] == "ทั้งหมด"){
+						foreach($result_users as $values) {
+							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+						}
+					}
+					$reply_message = $data;
+				}
+				if($arr[1] == "ฉันต้องการทราบจำนวนนิสิต"){
+					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
+					if($arr[2] == "ชาย"){
+						foreach($result_users as $values) {
+							$male = substr("$values["user_firstname"]",0,3);
+							if($male == "นาย"){
+								$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+						}
+					}
+					$reply_message = $data;
+				}
+				if($arr[1] == "ฉันต้องการทราบจำนวนนิสิต"){
+					$result_users = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
+					if($arr[2] == "หญิง"){
+						foreach($result_users as $values) {
+							$data .= $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 						}
 					}
 					$reply_message = $data;
